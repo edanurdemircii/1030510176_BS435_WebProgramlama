@@ -1,0 +1,44 @@
+/* styles.css */
+
+.startBody {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Buton Stilleri */
+button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #3498db; /* Mavi renk */
+    color: #ffffff; /* Beyaz renk */
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #2980b9; /* Hover'da daha koyu mavi */
+}
+/* Tahmin Metni Stilleri */
+p {
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #ecf0f1; /* Arka plan rengi */
+}
+
+/* Puan Metni Stilleri */
+#score {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+#score-frame {
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid orange; /* Çerçeve rengi */
+    border-radius: 50%; /* Daire şeklinde köşeler */
+    margin-left: 10px; /* İstediğiniz boşluk miktarı */
+}
