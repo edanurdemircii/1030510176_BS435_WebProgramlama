@@ -1,17 +1,26 @@
-import React, { useState,useEffect} from 'react';
-import   "./start.css";
+import React, { useState, useEffect } from 'react';
+import './start.css';
 
-function OyunComponent() {
-    const [sayı, setSayı] = useState(Math.floor(Math.random() * 10) + 1);
+function OyunComponent({ mod, onGeriDon }) {
+    const [sayı, setSayı] = useState(generateRandomNumber(mod));
     const [tahmin, setTahmin] = useState('');
     const [geribildirim, setGeribildirim] = useState('');
     const [puan, setPuan] = useState(0);
+    const [tahminSayac, setTahminSayac] = useState(0);
 
     useEffect(() => {
-        if (puan === 50) {
-            oyunuSıfırla();
+        if (puan === 50 || tahminSayac===5 ) {
+            if (tahminSayac === 5) {
+                setGeribildirim('Başarısız! Tahmin hakkınız bitti.');
+                oyunuSıfırla();
+            }
+
         }
-    }, [puan]);
+    }, [puan,tahminSayac]);
+
+    function generateRandomNumber(mod) {
+        return mod === 'kolay' ? Math.floor(Math.random() * 10) + 1 : Math.floor(Math.random() * 100) + 1;
+    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -19,22 +28,30 @@ function OyunComponent() {
 
         if (isNaN(parsEdilenTahmin)) {
             setGeribildirim('Lütfen geçerli bir sayı girin.');
-        } else if (parsEdilenTahmin === sayı) {
-            setGeribildirim('Doğru tahmin. Tebrikler!');
-            setPuan(puan + 5); // Her doğru tahminde 5 puan ekle
-        } else if (parsEdilenTahmin > sayı) {
-            setGeribildirim('Tahmininizi azaltın.');
         } else {
-            setGeribildirim('Tahmininizi arttırın.');
+            setTahminSayac(tahminSayac + 1);
+
+            if (parsEdilenTahmin === sayı) {
+                setGeribildirim('Doğru tahmin. Tebrikler!');
+                setPuan(puan + 5);
+            } else if (parsEdilenTahmin > sayı) {
+                setGeribildirim('Tahmininizi azaltın.');
+            } else {
+                setGeribildirim('Tahmininizi arttırın.');
+            }
+
+
+
+            setTahmin(''); // Gönderimden sonra giriş alanını temizle
         }
-        setTahmin(''); // Gönderimden sonra giriş alanını temizle
     }
 
     function oyunuSıfırla() {
-        setSayı(Math.floor(Math.random() * 10) + 1);
+        setSayı(generateRandomNumber(mod));
         setTahmin('');
         setGeribildirim('');
         setPuan(0);
+        setTahminSayac(0);
     }
 
     return (
@@ -43,11 +60,11 @@ function OyunComponent() {
             <p>{geribildirim}</p>
             <form onSubmit={handleSubmit}>
                 <label>
-                    1 ile 10 arasında bir sayı tahmin edin:
+                    {mod === 'kolay' ? '1 ile 10' : '1 ile 100'} arasında bir sayı tahmin edin:
                     <input
                         type="number"
                         min="1"
-                        max="100"
+                        max={mod === 'kolay' ? '10' : '100'}
                         placeholder="Tahmininizi girin"
                         value={tahmin}
                         onChange={(event) => setTahmin(event.target.value)}
@@ -59,7 +76,9 @@ function OyunComponent() {
                 <p id="score">Puan: {puan}</p>
             </div>
             <button onClick={oyunuSıfırla}>Oyunu Sıfırla</button>
+            <button onClick={onGeriDon}>Geri Dön</button>
         </div>
     );
 }
+
 export default OyunComponent;
