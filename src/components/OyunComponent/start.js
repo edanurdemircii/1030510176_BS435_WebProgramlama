@@ -32,12 +32,12 @@ function OyunComponent({ mod, onGeriDon }) {
             setTahminSayac(tahminSayac + 1);
 
             if (parsEdilenTahmin === sayı) {
-                setGeribildirim('Doğru tahmin. Tebrikler!');
+                setGeribildirim('Doğru tahmin!. Tebrikler!');
                 setPuan(puan + 5);
             } else if (parsEdilenTahmin > sayı) {
-                setGeribildirim('Tahmininizi azaltın.');
+                setGeribildirim('Tahmininizi azaltın!');
             } else {
-                setGeribildirim('Tahmininizi arttırın.');
+                setGeribildirim('Tahmininizi arttırın!');
             }
 
 
@@ -56,7 +56,7 @@ function OyunComponent({ mod, onGeriDon }) {
 
     return (
         <div className="startBody">
-            <h1>OYUNA HOŞGELDİNİZ</h1>
+            <h1>....OYUNA HOSGELDİNİZ....</h1>
             <p>{geribildirim}</p>
             <form onSubmit={handleSubmit}>
                 <label>
