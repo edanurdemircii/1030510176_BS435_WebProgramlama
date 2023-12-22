@@ -1,3 +1,4 @@
+// (Diğer import'lar ve component başlangıcı)
 import React, { useState, useEffect } from 'react';
 import './start.css';
 
@@ -8,19 +9,26 @@ function OyunComponent({ mod, onGeriDon }) {
     const [puan, setPuan] = useState(0);
     const [tahminSayac, setTahminSayac] = useState(0);
 
+    function generateRandomNumber(mod) {
+        return mod === 'kolay' ? Math.floor(Math.random() * 10) + 1 : Math.floor(Math.random() * 100) + 1;
+    }
+
+    function oyunuSıfırla() {
+        setSayı(generateRandomNumber(mod));
+        setTahmin('');
+        setGeribildirim('');
+        setPuan(0);
+        setTahminSayac(0);
+    }
+
     useEffect(() => {
-        if (puan === 50 || tahminSayac===5 ) {
+        if (puan === 50 || tahminSayac === 5) {
             if (tahminSayac === 5) {
                 setGeribildirim('Başarısız! Tahmin hakkınız bitti.');
                 oyunuSıfırla();
             }
-
         }
-    }, [puan,tahminSayac]);
-
-    function generateRandomNumber(mod) {
-        return mod === 'kolay' ? Math.floor(Math.random() * 10) + 1 : Math.floor(Math.random() * 100) + 1;
-    }
+    }, [puan, tahminSayac, mod]);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -40,23 +48,19 @@ function OyunComponent({ mod, onGeriDon }) {
                 setGeribildirim('Tahmininizi arttırın!');
             }
 
-
-
             setTahmin(''); // Gönderimden sonra giriş alanını temizle
         }
     }
 
-    function oyunuSıfırla() {
-        setSayı(generateRandomNumber(mod));
-        setTahmin('');
-        setGeribildirim('');
-        setPuan(0);
-        setTahminSayac(0);
-    }
+    // Scor butonuna tıklandığında yapılacak işlem
+    const handleScorClick = () => {
+        // Scor kutusu gösterilebilir veya başka bir işlem yapılabilir.
+        console.log('Scor butonuna tıklandı!');
+    };
 
     return (
         <div className="startBody">
-            <h1>....OYUNA HOSGELDİNİZ....</h1>
+            <h1>Haydi Başlayalım!</h1>
             <p>{geribildirim}</p>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -77,6 +81,11 @@ function OyunComponent({ mod, onGeriDon }) {
             </div>
             <button onClick={oyunuSıfırla}>Oyunu Sıfırla</button>
             <button onClick={onGeriDon}>Geri Dön</button>
+
+            {/* Scor butonu */}
+            <button className="scorButton" onClick={handleScorClick}>
+                Scor
+            </button>
         </div>
     );
 }

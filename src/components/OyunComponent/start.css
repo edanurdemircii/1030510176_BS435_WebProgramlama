@@ -1,44 +1,60 @@
 /* styles.css */
 
-.startBody {
-    background-color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
+/* Genel Stiller */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
 
-/* Buton Stilleri */
-button {
+.startBody {
+    background-color: #3498db; /* Açık mavi renk */
+    height: 50vh;
+    padding: 30px; /* Arttırılmış iç boşluk */
+    text-align: center;
+    border-radius: 15px; /* Kare çerçeve için köşe yuvarlatma */
+    display: flex; /* Flex konteyner olarak kullanma */
+    flex-direction: column; /* İçeriği dikey yönde sırala */
+    justify-content: center; /* Dikeyde ortalama */
+    align-items: center; /* Yatayda ortalama */
+}
+
+/* Buton ve Tahmin Giriş Alanı Stilleri */
+button,
+input {
     border: none;
     padding: 10px 20px;
-    border-radius: 8px;
-    background-color: #3498db; /* Mavi renk */
-    color: #ffffff; /* Beyaz renk */
-    cursor: pointer;
+    border-radius: 50px; /* Kenarları dairesel yapma */
     font-size: 16px;
     margin-top: 10px;
 }
 
-button:hover {
-    background-color: #2980b9; /* Hover'da daha koyu mavi */
+button {
+    background-color: #fffdfd; /* Beyaz renk */
+    color: #3498db; /* Açık mavi renk */
 }
-/* Tahmin Metni Stilleri */
+
+button:hover {
+    background-color: #3498db; /* Hover'da daha koyu mavi */
+}
+
+input {
+    background-color: #fffdfd; /* Beyaz renk */
+    color: #3498db; /* Açık mavi renk */
+}
+
+/* Metin Stilleri */
 p {
     font-size: 20px;
     border-radius: 8px;
     padding: 10px;
-    background-color: #ecf0f1; /* Arka plan rengi */
+    background-color: #3498db; /* Arka plan rengi */
 }
 
-/* Puan Metni Stilleri */
+/* Puan Stilleri */
 #score {
     font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-#score-frame {
-    display: inline-block;
-    padding: 10px;
-    border: 2px solid orange; /* Çerçeve rengi */
-    border-radius: 50%; /* Daire şeklinde köşeler */
-    margin-left: 10px; /* İstediğiniz boşluk miktarı */
+
 }

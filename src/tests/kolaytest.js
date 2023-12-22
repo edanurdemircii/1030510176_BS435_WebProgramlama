@@ -36,3 +36,20 @@ test('Geçersiz tahmin için hata mesajı gelir.', () => {
     const errorMessage = screen.getByText('Lütfen geçerli bir sayı girin.');
     expect(errorMessage).toBeInTheDocument();
 });
+test('Zor mod için doğru tahmin puan arttırır.', () => {
+    render(<App />);
+
+    // Modu "Zor" olarak seç
+    fireEvent.click(screen.getByText('Zor Mod'));
+
+    // Tahmin yap
+    const input = screen.getByPlaceholderText('Tahmininizi girin');
+    fireEvent.change(input, { target: { value: '5' } });
+
+    // Tahmin gönder düğmesini tıkla
+    fireEvent.click(screen.getByText('Tahmin Gönder'));
+
+    // Puanın arttığını kontrol et
+    const scoreElement = screen.getByText('Puan: 5');
+    expect(scoreElement).toBeInTheDocument();
+});
